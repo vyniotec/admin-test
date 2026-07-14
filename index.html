@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title id="pageTitle"></title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header class="header">
+      <div class="container header-content">
+        <div class="logo">
+          <img id="logo" src="" alt="" />
+        </div>
+
+        <div class="header-buttons">
+          <a id="headerCall" class="btn red"></a>
+          <a id="headerWhatsapp" class="btn whatsapp"></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+
+    <section id="hero">
+      <div class="container hero">
+        <div class="hero-left">
+          <h1 id="heroTitle"></h1>
+          <p id="heroSubtitle"></p>
+          <div>
+            <input id="newTitle" type="text" />
+            <button onclick="changeTitle()">submit</button>
+          </div>
+          <div class="hero-buttons">
+            <a id="heroCall" class="btn red"></a>
+            <a id="heroWhatsapp" class="btn whatsapp"></a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <img id="heroImage" />
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+
+    <section id="services">
+      <div class="container">
+        <div id="servicesGrid" class="services-grid"></div>
+      </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+
+    <section id="benefits">
+      <div class="container">
+        <h2>¿Por qué elegirnos?</h2>
+
+        <div id="benefitsGrid" class="benefits-grid"></div>
+      </div>
+    </section>
+
+    <!-- MAPA -->
+
+    <section id="coverage">
+      <div class="container coverage">
+        <div>
+          <h2 id="coverageTitle"></h2>
+
+          <p id="coverageSubtitle"></p>
+        </div>
+
+        <img id="coverageImage" />
+      </div>
+    </section>
+
+    <!-- RESEÑAS -->
+
+    <section id="reviews">
+      <div class="container">
+        <div class="reviews-header">
+          <h2>Lo que dicen nuestros clientes</h2>
+
+          <div class="rating">
+            ⭐⭐⭐⭐⭐
+
+            <span id="ratingValue">5.0</span>
+          </div>
+        </div>
+
+        <div id="reviewsGrid" class="reviews-grid"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+      <div class="container footer">
+        <div>
+          <img id="footerLogo" />
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+
+          <p id="footerPhone"></p>
+
+          <p id="footerWhatsappNumber"></p>
+        </div>
+
+        <div>
+          <h4>Horario</h4>
+
+          <p id="footerSchedule"></p>
+        </div>
+
+        <div>
+          <h4>Zonas</h4>
+
+          <p id="footerCoverage"></p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/react.js"></script>
+  </body>
+</html>
