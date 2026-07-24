@@ -18,13 +18,13 @@ interface EditImageProps {
 }
 
 export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
-  console.log("imageSrc: ", imageSrc);
   const router = useRouter();
 
   const [openReplace, setOpenReplace] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<StaticImageData | string>(placeholder);
   const [loading, setLoading] = useState(false);
+  const [principalImage, setPrincipalImage] = useState(imageSrc);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const selectedFile = e.target.files?.[0] ?? null;
@@ -57,36 +57,37 @@ export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
     setLoading(true);
 
     try {
-      await uploadImage(file);
+      const uploadRes = await uploadImage(file);
+      if (uploadRes.success) {
+        const imageUrl = `http://backend-test-dun.vercel.app/uploads/${file.name}`;
 
-      const imageUrl = `http://backend-test-dun.vercel.app/uploads/${file.name}`;
+        const result = await changeLanding(imageUrl, path);
 
-      const result = await changeLanding(imageUrl, path);
+        if (result.success) {
+          const cleanUrl = () => {
+            const cleanLink = imageSrc.split("/uploads/")[1];
+            return cleanLink;
+          };
+          const cleanLink = cleanUrl();
 
-      if (result.success) {
-        const cleanUrl = () => {
-          const cleanLink = imageSrc.split("/uploads/")[1];
-          return cleanLink;
-        };
-        const cleanLink = cleanUrl();
+          const resDelete = await deleteImage({
+            path: "public/uploads/" + cleanLink,
+          });
 
-        const resDelete = await deleteImage({
-          path: "public/uploads/" + cleanLink,
-        });
+          if (resDelete.success) {
+            toast.success("Imagen subida correctamente.");
+            setPrincipalImage(URL.createObjectURL(file));
+            setOpenReplace(false);
+            setFile(null);
+            setPreview(placeholder);
 
-        if (resDelete.success) {
-          toast.success("Imagen subida correctamente.");
-
-          setOpenReplace(false);
-          setFile(null);
-          setPreview(placeholder);
-
-          router.refresh();
+            router.refresh();
+          } else {
+            toast.error(resDelete.message);
+          }
         } else {
-          toast.error(resDelete.message);
+          toast.error(result.message);
         }
-      } else {
-        toast.error(result.message);
       }
     } catch (err) {
       console.error(err);
@@ -142,7 +143,7 @@ export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
       <Image
         width={300}
         height={300}
-        src={imageSrc}
+        src={principalImage}
         alt={alt}
         className="w-[300px] h-[300px] object-cover rounded-lg"
       />
