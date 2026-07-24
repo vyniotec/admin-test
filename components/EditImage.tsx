@@ -18,6 +18,7 @@ interface EditImageProps {
 }
 
 export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
+  console.log("imageSrc: ", imageSrc);
   const router = useRouter();
 
   const [openReplace, setOpenReplace] = useState(false);
