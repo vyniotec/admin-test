@@ -1,6 +1,7 @@
 import loadLanding from "@/api/loadLanding";
 import EditImage from "@/components/EditImage";
 import EditText from "@/components/EditText";
+import DeleteImage from "@/components/DeleteImage";
 
 export default async function Edit() {
   const data = await loadLanding();
@@ -18,6 +19,7 @@ export default async function Edit() {
         alt="Imagen principal"
         path="hero.image"
       />
+      <DeleteImage image={data.hero.image} />
     </div>
   );
 }

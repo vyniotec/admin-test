@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import deleteImage from "@/api/deleteImage";
 
 import { uploadImage } from "@/api/uploadImage";
 import placeholder from "@/public/placeholder.png";
@@ -62,13 +63,27 @@ export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
       const result = await changeLanding(imageUrl, path);
 
       if (result.success) {
-        toast.success("Imagen subida correctamente.");
+        const cleanUrl = () => {
+          const cleanLink = imageSrc.split("/uploads/")[1];
+          return cleanLink;
+        };
+        const cleanLink = cleanUrl();
 
-        setOpenReplace(false);
-        setFile(null);
-        setPreview(placeholder);
+        const resDelete = await deleteImage({
+          path: "public/uploads/" + cleanLink,
+        });
 
-        router.refresh();
+        if (resDelete.success) {
+          toast.success("Imagen subida correctamente.");
+
+          setOpenReplace(false);
+          setFile(null);
+          setPreview(placeholder);
+
+          router.refresh();
+        } else {
+          toast.error(resDelete.message);
+        }
       } else {
         toast.error(result.message);
       }
