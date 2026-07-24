@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 import { uploadImage } from "@/api/uploadImage";
-import placeholder from "@/public/palceholder.png";
+import placeholder from "@/public/placeholder.png";
 
 import changeLanding from "@/api/changeLanding";
 
