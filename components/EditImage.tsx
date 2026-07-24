@@ -138,7 +138,7 @@ export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
 
   return !openReplace ? (
     <div className="flex flex-col gap-2 max-w-md">
-      <h1>Imagen del hero</h1>
+      <h1>{alt}</h1>
 
       <Image
         width={300}
@@ -157,7 +157,7 @@ export default function EditImage({ imageSrc, alt, path }: EditImageProps) {
     </div>
   ) : (
     <div className="flex flex-col gap-2 max-w-md">
-      <h1>Imagen del hero</h1>
+      <h1>{alt}</h1>
 
       <div className="relative w-[300px] h-[300px]">
         <Image
